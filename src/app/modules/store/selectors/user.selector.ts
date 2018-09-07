@@ -2,19 +2,24 @@ import { createSelector } from '@ngrx/store';
 
 import { getRootState, State } from '../reducers';
 import { UserState } from '../reducers/user.reducer';
-import { User } from '../../models/user.model'
+import { User } from '../../models/user.model';
 
 export const getUserState = createSelector(
-    getRootState, (state : State) => state.user
-)
+  getRootState,
+  (state: State) => state.user
+);
 
 export const getUserDetails = createSelector(
-    getUserState, (state : UserState) => state.user);
+  getUserState,
+  (state: UserState) => state.user
+);
 
 export const getAuthorities = createSelector(
-    getUserDetails, (user : User) => user.authorities
+  getUserDetails,
+  (user: User) => (user && user.authorities ? user.authorities : [])
 );
 
 export const getUserAccess = createSelector(
-    getUserDetails, (user: User) => user.dataSets
+  getUserDetails,
+  (user: User) => (user && user.dataSets ? user.dataSets : [])
 );
