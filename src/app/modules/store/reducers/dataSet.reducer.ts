@@ -14,7 +14,7 @@ export const initialState : DataSetState = {
     loading : false,
     loaded : false,
     error : null,
-    dataSets : []
+    dataSets : [ ]
 }
 
 export function dataSetReducer(

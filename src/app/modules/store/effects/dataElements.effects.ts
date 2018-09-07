@@ -18,7 +18,9 @@ import {
     @Effect() loadDataSet$ : Observable<any> = this.action$.pipe(
         ofType(DataElementActionTypes.LoadDataElement),
         switchMap(() => this.dataElementService.getDataElements().pipe(
-            map((dataElement : DataElement[]) => new LoadDataElementSuccess(dataElement)),
+            map((response) => {
+                const { dataElements } = response;
+                return new LoadDataElementSuccess(dataElements)}),
             catchError((error : ErrorMessage) => of(new LoadDataElementFail(error)))
         ))
     )

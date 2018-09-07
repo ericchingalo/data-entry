@@ -1,3 +1,37 @@
-<h2>
-    hello World
-</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="data-entry form">
+            <div class="row data-entry">
+                <div class="col-md-3">
+                    Organistion Unit
+                </div>
+                <div class="col-md-9">
+                    <input type="text" value="{{ (selectedOrgUnit$ | async).name }}" disabled="true" class="inputs">
+                </div>
+            </div>
+            <div class="row data-entry">
+                <div class="col-md-3">
+                    Data set
+                </div>
+                <div class="col-md-9">
+                    <select name="DataSet" class="inputs">
+                        <option *ngFor="let dataSet of (dataSets$ | async)" value="dataSet.id"> {{ dataSet.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row data-entry">
+                <div class="col-md-3">
+                    Period
+                </div>
+                <div class="col-md-9">
+                    <select name="period" disabled="true" id="period" class="inputs">
+                            <option>[select Period]</option>
+                           <option></option> 
+                      </select>
+                    <button class="inputs">Previous Year</button>
+                    <button class="inputs">Next Year</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

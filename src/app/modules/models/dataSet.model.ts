@@ -8,6 +8,9 @@ export interface DataSet{
     openFuturePeriods: string,
     expiryDays: number,
     dataEntryForm? : string,
+    organisationUnits : Array<{
+        id: string
+    }>
     categoryCombo : {
         name : string,
         id : string,

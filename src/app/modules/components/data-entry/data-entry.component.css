@@ -1,0 +1,22 @@
+select,
+input {
+    width: inherit;
+}
+
+#period {
+    width: 30%;
+}
+
+.data-entry {
+    padding: 0.5%
+}
+
+button {
+    width: auto;
+    margin-left: 0.5%;
+}
+
+.inputs {
+    height: inherit;
+    padding: 0.5%
+}
