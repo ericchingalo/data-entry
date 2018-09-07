@@ -25,14 +25,29 @@ export const getSelectedDataSet = createSelector(
     userAccess: Array<string>,
     authorities: Array<string>
   ) => {
-    console.log(_.some(authorities, 'ALL'));
-    return _.some(authorities, 'ALL')
-      ? _.filter(
-          dataSets,
-          (dataSet: DataSet) => dataSet.organisationUnits === selectedOrgUnit
+    const dataSetByOu: DataSet[] = [];
+    let dataSetByAccess: DataSet[] = [];
+    // filtering by OU
+    dataSets.map(dataSet => {
+      if (dataSet && dataSet.organisationUnits) {
+        dataSet.organisationUnits.map(organisationUnit => {
+          if (organisationUnit.id === selectedOrgUnit.id) {
+            dataSetByOu.push(dataSet);
+          }
+        });
+      }
+    });
+    // filtering by authorities
+    if (_.indexOf(authorities, 'ALL') === -1) {
+      dataSetByAccess = _.concat(
+        dataSetByAccess,
+        _.filter(dataSetByOu, (dataSet: DataSet) =>
+          _.includes(userAccess, dataSet.id)
         )
-      : _.filter(dataSets, (dataSet: DataSet) =>
-          _.some(userAccess, [dataSet.id])
-        );
+      );
+    } else {
+      dataSetByAccess = _.concat(dataSetByAccess, dataSetByOu);
+    }
+    return dataSetByAccess;
   }
 );
